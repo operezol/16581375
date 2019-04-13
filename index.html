@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            width: 100vw;
+            height: 25600vw;
+            display: block;
+        }
+        
+        .bit {
+            width: calc(100vw / 256);
+            height: calc(100vw / 256);
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+
+<script>
+    var red = 0;
+    var green = 0;
+    var blue = 0;
+
+    var timeHandler;
+
+
+    var calcColor = function() {
+        if (red < 255) {
+            if (green < 255) {
+                if (blue < 255) {
+                    blue++;
+                } else {
+                    blue = 0;
+                    green++;
+                }
+            } else {
+                green = 0;
+                red++;
+            }
+        } else {
+            clearInterval(timeHandler);
+        }
+    }
+
+    var drawRect = function() {
+        var bit = document.createElement('div');
+        bit.classList.add('bit');
+        bit.style.backgroundColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
+        document.querySelector('body').appendChild(bit);
+    }
+
+    timeHandler = setInterval(function() {
+        calcColor();
+        drawRect();
+    }, 1);
+</script>
+
+</html>
